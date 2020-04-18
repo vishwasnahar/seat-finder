@@ -1,41 +1,43 @@
 class SeatService
-  attr_accessor :columns, :rows, :seats
+  attr_accessor :columns, :rows, :seats, :row_names
   def initialize(details)
     self.columns = details["venue"]["layout"]["columns"].to_i
     self.rows = details["venue"]["layout"]["rows"].to_i
     self.seats = details["seats"] 
-    @rows = ('a'..'z').to_a
+    self.row_names = ('a'..'z').to_a
   end
 
   def self.seat_filter(details)
     obj = new(details)
-    mid_value = obj.get_middle_value(obj.columns)
-    sorted_seats = obj.set_difference_seats(obj.seats, mid_value)
-    obj.get_sorted_seats(sorted_seats)
+    obj.get_sorted_seats
   end
 
   # Return middle value of row
-  def get_middle_value(columns)
+  def get_middle_value
     (columns / 2) + 1
   end
 
   # Return sorted seats with different to front and middle seat
-  def set_difference_seats(seats, mid_value)
+  def set_difference_seats
     sorted_seats = []
     seats.each do |key, value|
-      difference = find_difference(value["row"], mid_value, value["column"])
-      sorted_seats << value.merge({difference: difference})
+      sorted_seats << merge_difference(value)
     end
     sorted_seats
   end
+  
+  # Return value with difference
+  def merge_difference(value)
+    value.merge({difference: find_difference(value["row"], value["column"])})
+  end
 
   # Return seat difference from middle and front
-  def find_difference(row, column, mid_value)
-    @rows.find_index(row) + (mid_value - (column).to_i).abs
+  def find_difference(row, column)
+    row_names.find_index(row) + (get_middle_value - (column).to_i).abs
   end
 
   # Return sorted seats close to front and middle
-  def get_sorted_seats(sorted_seats)
-    sorted_seats.sort_by{ |v| [v[:difference], v["row"].to_i, v["column"].to_i] }
+  def get_sorted_seats
+    set_difference_seats.sort_by{ |v| [v[:difference], v["row"].to_i, v["column"].to_i] }
   end
 end
