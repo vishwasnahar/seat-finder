@@ -77,7 +77,7 @@ class Movie extends React.Component {
                   <td colSpan="5">{item.title}</td>
                   <td colSpan="5">{item.year}</td>
                   <td colSpan="5">{item.genre}</td>  
-                  <td colSpan="8"><Link to={item.imdb_link} className="btn btn-primary">Link</Link></td>
+                  <td colSpan="8">{item.imdb_link}</td>
                   <td><Link to={{pathname: "./edit", state: {id: item.id}}} className="btn btn-primary">Edit</Link></td>
                   <a href="#" onClick={this.handleChange.bind(this,event, item)}>Destroy</a>
                   <td><Link to={{pathname: "./Show", state: {id: item.id}}} className="btn btn-primary">View</Link></td>
