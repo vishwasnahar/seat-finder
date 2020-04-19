@@ -31,7 +31,7 @@ class Home extends React.Component {
   handleresponse(event) {
     let detail = {"venue": {"layout": {"rows": this.state.rows, "columns": this.state.columns}},
                   "seats": this.state.seats}
-    axios.get(`http://localhost:3000/seats`, {params: {detail: detail}})
+    axios.get(`/seats`, {params: {detail: detail}})
       .then(res => {
         console.log(res, 'Res')
         this.setState({response: res.data.seats });

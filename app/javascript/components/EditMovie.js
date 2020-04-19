@@ -25,7 +25,7 @@ class Home extends React.Component {
   }
 
   componentDidMount(){
-    axios.get(`http://localhost:3000/movies/`+this.props.location.state.id)
+    axios.get(`/movies/`+this.props.location.state.id)
       .then(res => {
         console.log(res, 'Res')
         this.setState({title: res.data.movie.title, year: res.data.movie.year, summary: res.data.movie.summary, genre: res.data.movie.genre, imdb: res.data.movie.imdb_link});
@@ -34,7 +34,7 @@ class Home extends React.Component {
   
   handleresponse(event) {
     let data = {title: this.state.title, year: this.state.year, summary: this.state.summary, genre: this.state.genre, imdb_link: this.state.imdb}
-    axios.patch(`http://localhost:3000/movies/`+this.props.location.state.id, {'movie': data})
+    axios.patch(`/movies/`+this.props.location.state.id, {'movie': data})
       .then(res => {
         console.log(res, 'Res')
         this.props.history.push('/')

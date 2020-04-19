@@ -25,7 +25,7 @@ class Home extends React.Component {
   
   handleresponse(event) {
     let data = {title: this.state.title, year: this.state.year, summary: this.state.summary, genre: this.state.genre, imdb_link: this.state.imdb}
-    axios.post(`http://localhost:3000/movies`, {'movie': data})
+    axios.post(`/movies`, {'movie': data})
       .then(res => {
         console.log(res, 'Res')
         this.props.history.push('/')

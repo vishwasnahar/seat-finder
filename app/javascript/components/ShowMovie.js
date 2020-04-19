@@ -13,7 +13,7 @@ class ShowMovie extends React.Component {
   }
   
   componentDidMount(){
-    axios.get(`http://localhost:3000/movies/`+this.props.location.state.id)
+    axios.get(`/movies/`+this.props.location.state.id)
       .then(res => {
         console.log(res, 'Res')
         this.setState({response: res.data.movie });

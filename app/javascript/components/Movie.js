@@ -23,7 +23,7 @@ class Movie extends React.Component {
   }
   
   componentDidMount(){
-    axios.get(`http://localhost:3000/movies`)
+    axios.get(`/movies`)
       .then(res => {
         console.log(res, 'Res')
         this.setState({response: res.data.movies });
@@ -40,9 +40,9 @@ class Movie extends React.Component {
   }
 
   handleChange(event, item){
-    axios.delete(`http://localhost:3000/movies/`+item.id)
+    axios.delete(`/movies/`+item.id)
       .then(response => {
-        axios.get(`http://localhost:3000/movies`)
+        axios.get(`/movies`)
         .then(res => {
           console.log(res, 'Res')
           this.setState({response: res.data.movies });
