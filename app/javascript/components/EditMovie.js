@@ -53,33 +53,49 @@ class Home extends React.Component {
     console.log(this.state)
     return (
       <>
+        <button onClick={()=> this.props.history.push('/')}>Back</button>
         <form onSubmit={this.handleresponse}>
-          <label>
-            Title:
+          <div style={formRow}>
+            <label>
+              <b>Title:</b>
+            </label>
             <input type="text" name="title" value={this.state.title} onChange={this.handleChange} required/>
-          </label>
-          <label>
-            Year:
+          </div>
+          <div style={formRow}>
+            <label>
+              <b>Year:</b>
+            </label>
             <input type="number" name="year" value={this.state.year} onChange={this.handleChange} required />
-          </label>
-          <label>
-            Genre:
+          </div>
+          <div style={formRow}>
+            <label>
+              <b>Genre:</b>
+            </label>
             <input type="text" name="genre" value={this.state.genre} onChange={this.handleChange} required />
-          </label>
-          <label>
-            IMDB:
+          </div>
+          <div style={formRow}>
+            <label>
+              <b>IMDB:</b>
+            </label>
             <input type="text" name="imdb" value={this.state.imdb} onChange={this.handleChange} required />
-          </label>
-          <label>
-            Summary:
+          </div>
+          <div style={formRow}>
+            <label>
+              <b>Summary:</b>
+            </label>
             <input type="text" name="summary" value={this.state.summary} onChange={this.handleChange} required />
-          </label>    
-          <input type="submit" value="Submit" />
-          <button onClick={()=> this.props.history.push('/')}>Cancel</button>
+          </div>
+          <input type="submit" value="Update Movie" />
         </form>
       </>
     );
   }
+}
+
+const formRow = {
+  width: '100%',
+  display: "inline-block",
+  padding: 10
 }
 
 export default Home

@@ -98,61 +98,60 @@ class Home extends React.Component {
       <>
         <form onSubmit={this.handleresponse}>
           <div style={formRow}>
-          <div style={formfield}>
-            <label>
-              TotalRows:
-              <p><input type="number" name="rows" value={this.state.rows} onChange={this.handleChange} required/></p>
-            </label>
-            <p>{this.state.errors.rows}</p>
-          </div>
-          <div style={formfield}>
-            <label>
-              TotalColumns:
-              <p><input type="number" name="columns" value={this.state.columns} onChange={this.handleChange} required /></p>
-            </label>
-            <p>{this.state.errors.columns}</p>
-          </div>
-          { this.state.rows && this.state.columns &&    
-          <>
             <div style={formfield}>
               <label>
-                SeatRow:
-                <p><input type="number" name="seatRow" value={this.state.seatRow} onChange={this.handleChange} /></p>
+                Total Seat Rows:
+                <p>
+                  <input type="number" name="rows" value={this.state.rows} onChange={this.handleChange} required/>
+                </p>
+              </label>
+              <p>{this.state.errors.rows}</p>
+            </div>
+            <div style={formfield}>
+              <label>
+                Total Seat Columns:
+                <p><input type="number" name="columns" value={this.state.columns} onChange={this.handleChange} required /></p>
+              </label>
+              <p>{this.state.errors.columns}</p>
+            </div>   
+          </div>
+          {this.state.seats && 
+          <div>
+            <b>Selected Seats are: </b>
+              {Object.values(this.state.seats).map( (item, i) => {
+              return <div>
+                <span style={line} key={i}>{item.id}{console.log(item, 'Item'+i)}</span>
+                <a style={{color: 'red', cursor: 'pointer'}} onClick={this.removeSubmit.bind(this, event, item)}>x</a>
+              </div>
+            })}
+          </div>
+          }
+          <h4>To add more seats Please add seat number below:</h4>
+          <div style={formRow}>
+            <div style={formfield}>
+              <label>
+                Seat Row:
+                <p><input type="number" name="seatRow" value={this.state.seatRow} onChange={this.handleChange} disabled={!(this.state.rows && this.state.columns)}/></p>
               </label>
               <p>{this.state.errors.seatRow}</p>
             </div>
             <div style={formfield}>
               <label>
-                SeatColumn:
-                <p><input type="number" name="seatColumn" value={this.state.seatColumn} onChange={this.handleChange} /></p>
+                Seat Column:
+                <p><input type="number" name="seatColumn" value={this.state.seatColumn} onChange={this.handleChange} disabled={!(this.state.rows && this.state.columns)}/></p>
               </label>
               <p>{this.state.errors.seatColumn}</p>
             </div>
-            { this.state.seatRow && this.state.seatColumn &&    
-              <div style={formfield}><button style={{marginTop: 30}} onClick={this.handleSubmit}>Add</button></div>
-            }     
-          </>
-          }
+            <div style={formfield}><button style={{marginTop: 30}} onClick={this.handleSubmit}  disabled={!(this.state.seatRow && this.state.seatColumn)}>Add Seat</button></div>
           </div>
-          {this.state.seats && 
-          <div>
-            <p>Selected Seats are: </p>
-              {Object.values(this.state.seats).map( (item, i) => {
-              return <div>
-                <span style={line} key={i}>{item.id}{console.log(item, 'Item'+i)}</span>
-                <a onClick={this.removeSubmit.bind(this, event, item)}>remove</a>
-              </div>
-            })}
-          </div>
-          }
           <br />
-          <input type="submit" value="Submit" />
+          <div style={formfield}><input style={{color: 'green'}} type="submit" value="Get Best Seat"/></div>
         </form>
         <div>
           {this.state.response[0] && 
           <div>
-            <p>Best Seats for you is <b>{this.state.response[0].id}</b></p>
-            <p>Better Seats are</p>
+            <h5>Best Seats for you is <b>{this.state.response[0].id}</b></h5>
+            <h5>Better Seats are:</h5>
               {this.state.response.map( (item, i) => {
               return (i > 0) && <span style={line} key={i}>{item.id}</span>
             })}
@@ -180,7 +179,9 @@ const line = {
   display: "inline-block",
   verticalAlign: "middle",
   float: "left",
-  marginRight: 10
+  marginRight: 10,
+  paddingLeft: 10,
+  paddingRight: 10
 }
 
 export default Home

@@ -26,26 +26,9 @@ class ShowMovie extends React.Component {
       <>
         <button onClick={()=> this.props.history.push('/')}>Back</button>
         <div>
-          <p>Movie: </p>
           <div>
-            <ul>
-              <li>
-                <p>Title</p>
-                <p>{this.state.response.title}</p>
-              </li>
-              <li>
-                <p>Genre</p>
-                <p>{this.state.response.genre}</p>
-              </li>
-              <li>
-                <p>Year</p>
-                <p>{this.state.response.year}</p>
-              </li>
-              <li>
-                <p>Summary</p>
-                <p>{this.state.response.summary}</p>
-              </li>
-            </ul>
+            <h3>{this.state.response.title} ({this.state.response.year}, {this.state.response.genre})</h3>
+            <p>{this.state.response.summary}</p>
           </div>
           <Seats />
         </div>

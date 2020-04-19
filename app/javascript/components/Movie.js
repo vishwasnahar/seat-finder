@@ -59,11 +59,10 @@ class Movie extends React.Component {
           <p><Link to="/new" className="btn btn-primary">Add new Movie</Link></p>
         </div>
         <div>
-          <p>Movies: </p>
+          <h2>Movies: </h2>
           <Table responsive striped bordered hover size="sm">
             <thead>
               <tr>
-                <th colSpan="2">#</th>
                 <th colSpan="5">Title</th>
                 <th colSpan="5">Year</th>
                 <th colSpan="5">Genre</th>
@@ -73,7 +72,6 @@ class Movie extends React.Component {
             <tbody>
               {this.state.response.map( (item, i) => {
                 return <tr key={i}>
-                  <td colSpan="2">{item.id}</td>
                   <td colSpan="5">{item.title}</td>
                   <td colSpan="5">{item.year}</td>
                   <td colSpan="5">{item.genre}</td>  
